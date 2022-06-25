@@ -39,7 +39,7 @@ Temporary Items
 .apdisk
 
 # Local files
-db.sqlite3
+.db.sqlite3
 .env
 .idea/
 __pycache__/
