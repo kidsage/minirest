@@ -1,0 +1,20 @@
+.minirest_logo {
+    font-family: 'The Nautigal', cursive;
+}
+
+
+.minirest_header {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+
+.minirest_footer {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+
+.minirest_footer_button {
+    font-size: .6rem;
+}
