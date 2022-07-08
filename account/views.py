@@ -5,4 +5,7 @@ from django.http import HttpResponse
 # Create your views here.
 
 def hello_world(request):
-    return render(request, 'account/hello_world.html')
+    if request.method == 'POST':
+        return render(request, 'account/hello_world.html', context={'text':'post method'})
+    else:
+        return render(request, 'account/hello_world.html', context={'text':'get method'})
