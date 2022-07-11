@@ -78,7 +78,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "django_bootstrap5",
-    'account',
+    'accountapp',
+    'profileapp',
 ]
 
 MIDDLEWARE = [
@@ -173,3 +174,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = reverse_lazy('account:hello_world')
 LOGOUT_REDIRECT_URL = reverse_lazy('account:login')
+
+
+# MEDIA SETTING
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
