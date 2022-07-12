@@ -7,7 +7,7 @@ app_name = "accountapp"
 urlpatterns = [
     path('hello_world/', hello_world, name='hello_world'),
     path('create/', AccountCreateView.as_view(), name='create'),
-    path('login/', LoginView.as_view(template_name='account/login.html'), name='login'),
+    path('login/', LoginView.as_view(template_name='accountapp/login.html'), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('detail/<int:pk>', AccountDetailView.as_view(), name='detail'), # primary key 정보를 받기 위해 뒤에 int:pk 붙여줌
     path('update/<int:pk>', AccountUpdateView.as_view(), name='update'),

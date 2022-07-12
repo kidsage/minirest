@@ -24,7 +24,7 @@ def hello_world(request):
         new_hello_world.text = temp
         new_hello_world.save()
 
-        return HttpResponseRedirect(reverse('account:hello_world'))
+        return HttpResponseRedirect(reverse('accountapp:hello_world'))
     else:
         hello_world_list = HelloWorld.objects.all()
         return render(request, 'accountapp/hello_world.html', context={'hello_world_list':hello_world_list})
@@ -33,7 +33,7 @@ def hello_world(request):
 class AccountCreateView(CreateView):
     model = User
     form_class = UserCreationForm
-    success_url = reverse_lazy('account:hello_world')
+    success_url = reverse_lazy('accountapp:hello_world')
     template_name = 'accountapp/create.html'
 
 
@@ -71,8 +71,8 @@ class AccountUpdateView(UpdateView):
 class AccountDeleteView(DeleteView):
     model = User
     context_object_name = 'target_user'
-    success_url = reverse_lazy('account:login')
-    template_name = 'account/delete.html'
+    success_url = reverse_lazy('accountapp:login')
+    template_name = 'accountapp/delete.html'
 
     # auth 테스트용 코드 > method dacorator로 대체
     def get(self, *args, **kwargs):
