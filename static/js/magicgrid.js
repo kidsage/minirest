@@ -293,5 +293,14 @@ let magicGrid = new MagicGrid({
   useMin: true
 });
 
+// 추가분의 js 코드 (공부 필요)
+var masonrys = document.getElementsByTagName("img");
+
+for (let i = 0; i < masonrys.length; i++) {
+  masonrys[i].addEventListener('load', function () {
+    magicGrid.positionItems();
+  }, false);
+}
+
 magicGrid.listen();
 // module.exports = MagicGrid; 
