@@ -23,7 +23,8 @@ class ProfileCreateView(CreateView):
 
         return super().form_valid(form)
     
-    def get_success_url(self):
+    # success url 대체 메소드
+    def get_success_url(self): 
         return reverse('accountapp:detail', kwargs={'pk' : self.object.user.pk})
 
 
