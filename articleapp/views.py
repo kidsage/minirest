@@ -1,6 +1,6 @@
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
 from django.contrib.auth.decorators import login_required
 from articleapp.decorators import article_ownership_required
 
@@ -57,3 +57,11 @@ class ArticleDeleteView(DeleteView):
     success_url = reverse_lazy('articleapp:list')
     template_name = 'articleapp/delete.html'
     
+
+# 여러개의 object를 보여줄 수 있는 게시판 형식의 뷰 > list view
+# pagination(페이지화) > 넘버링 이용해서 페이지 바꿀 수 있는. (무한 스크롤이랑은 다름)
+class ArticleListView(ListView):
+    model = Article
+    context_object_name = 'article_list'
+    template_name = 'articleapp/list.html'
+    paginate_by = 5 # page 당 article 개수 (테스트중)
