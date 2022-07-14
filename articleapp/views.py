@@ -5,7 +5,6 @@ from django.contrib.auth.decorators import login_required
 from articleapp.decorators import article_ownership_required
 from django.views.generic.edit import FormMixin
 
-
 from articleapp.forms import ArticleCreationForm
 from articleapp.models import Article
 from commentapp.forms import CommentCreationForm
