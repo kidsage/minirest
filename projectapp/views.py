@@ -27,6 +27,6 @@ class ProjectDetailView(DetailView):
 
 class ProjectListView(ListView):
     model = Project
-    context_object_name = 'target_project'
+    context_object_name = 'project_list'
     template_name = 'projectapp/list.html'
-    paginate_by = 5
+    paginate_by = 5 # 나중에 페이지네이션 쪽 업그레이드 할 예정
