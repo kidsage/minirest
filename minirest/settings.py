@@ -28,10 +28,12 @@ env = environ.Env(
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # False if not in os.environ because of casting above
-DEBUG = env('DEBUG')
+# DEBUG = env('DEBUG')
+DEBUG = True
 
 # Raises Django's ImproperlyConfigured
 # exception if SECRET_KEY not in os.environ
+# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
 
 # Parse database connection url strings
