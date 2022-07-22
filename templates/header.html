@@ -2,7 +2,11 @@
 <!-- margin 두 값중 앞은 상하, 뒤는 좌우 -->
 <div class="minirest_header">
     <div>
-        <h1 class="minirest_logo">Minirest</h1>
+        <h1 class="minirest_logo">
+            <a href="{% url 'articleapp:list' %}">
+                Minirest
+            </a>
+        </h1>
     </div>
     <div class="minirest_header_navbar">
         <a href="{% url 'articleapp:list' %}" class="minirest_header_nav">
