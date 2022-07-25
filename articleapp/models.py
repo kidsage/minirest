@@ -12,3 +12,6 @@ class Article(models.Model):
     image = models.ImageField(upload_to='article/', null=False)
     content = models.TextField(null=True)
     created_at = models.DateField(auto_created=True, null=True)
+
+    class Meta:
+        ordering = ['-pk']

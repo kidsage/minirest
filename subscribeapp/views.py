@@ -40,5 +40,5 @@ class SubscriptionListView(ListView):
 
     def get_queryset(self):
         projects = Subscription.objects.filter(user=self.request.user).values_list('project') # 값들을 리스트화 시킴
-        article_list = Article.objects.filter(project__in=projects)
+        article_list = Article.objects.filter(project__in=projects).order_by('-pk')
         return article_list
