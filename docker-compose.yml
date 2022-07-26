@@ -28,7 +28,7 @@ services:
       - 80:80
 
   minirest:
-    image: django_test:5
+    image: minirest:1
     depends_on:
       - postgres
     networks:

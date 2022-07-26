@@ -1,4 +1,3 @@
-from minirest.settings.local import SECRET_KEY
 from .base import *
 
 env = environ.Env(
@@ -16,6 +15,7 @@ DEBUG = False
 # Raises Django's ImproperlyConfigured
 # exception if SECRET_KEY not in os.environ
 # SECURITY WARNING: keep the secret key used in production secret!
+
 # SECRET_KEY = env('SECRET_KEY')
 def read_secret(name):
     with open('/run/secrets/' + name, 'r') as f:
