@@ -12,8 +12,6 @@ RUN pip install -r requirements.txt
 
 RUN pip install psycopg2
 
-RUN echo "SECRET_KEY=django-insecure-!yts=3r-hvw&b@40qg7u-3e9umn62h=!-22yt-_)ecx!k8iv!*" > .env
-
 RUN python3 manage.py collectstatic
 
 EXPOSE 8000

@@ -1,3 +1,4 @@
+from minirest.settings.local import SECRET_KEY
 from .base import *
 
 env = environ.Env(
@@ -15,7 +16,15 @@ DEBUG = False
 # Raises Django's ImproperlyConfigured
 # exception if SECRET_KEY not in os.environ
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+# SECRET_KEY = env('SECRET_KEY')
+def read_secret(name):
+    with open('/run/secrets/' + name, 'r') as f:
+        file = f.read()
+        file = file.strip()
+    
+    return file
+
+SECRET_KEY = read_secret('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -29,7 +38,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'minirest',
         'USER': 'ian',
-        'PASSWORD': 'rlatjrwn31!',
+        'PASSWORD': read_secret('POSTGRES_PASSWORD'),
         'HOST': 'postgres',
         'PORT': '5432',
     }

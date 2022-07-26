@@ -9,9 +9,11 @@ services:
       - postgresql_db:/var/lib/postgresql/data
     ports:
       - 5432:5432
+    secrets:
+      - POSTGRES_PASSWORD
     environment:
       POSTGRES_USER: ian
-      POSTGRES_PASSWORD: rlatjrwn31!
+      POSTGRES_PASSWORD_FILE: /run/secrets/POSTGRES_PASSWORD
       POSTGRES_DB: minirest
 
   nginx:
@@ -26,7 +28,7 @@ services:
       - 80:80
 
   minirest:
-    image: django_test:4
+    image: django_test:5
     depends_on:
       - postgres
     networks:
@@ -34,6 +36,9 @@ services:
     volumes:
       - static:/home/minirest/staticfiles
       - media:/home/minirest/media
+    secrets:
+      - DJANGO_SECRET_KEY
+      - POSTGRES_PASSWORD
 
 
 networks:
@@ -43,3 +48,9 @@ volumes:
   static:
   media:
   postgresql_db:
+
+secrets:
+  DJANGO_SECRET_KEY:
+    external: true
+  POSTGRES_PASSWORD:
+    external: true
