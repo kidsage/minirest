@@ -1,0 +1,45 @@
+version: '3.7'
+services:
+
+  postgres:
+    image: postgres:latest
+    networks:
+      - network
+    volumes:
+      - postgresql_db:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: ian
+      POSTGRES_PASSWORD: rlatjrwn31!
+      POSTGRES_DB: minirest
+
+  nginx:
+    image: nginx:latest
+    networks:
+      - network
+    volumes:
+      - /Users/ian/project/minirest/nginx.conf:/etc/nginx/nginx.conf
+      - static:/data/static
+      - media:/data/media
+    ports:
+      - 80:80
+
+  minirest:
+    image: django_test:4
+    depends_on:
+      - postgres
+    networks:
+      - network
+    volumes:
+      - static:/home/minirest/staticfiles
+      - media:/home/minirest/media
+
+
+networks:
+  network:
+
+volumes:
+  static:
+  media:
+  postgresql_db:
