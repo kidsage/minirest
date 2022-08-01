@@ -9,12 +9,12 @@ services:
       - postgresql_db:/var/lib/postgresql/data
     ports:
       - 5432:5432
-    secrets:
-      - POSTGRES_PASSWORD
     environment:
       POSTGRES_USER: ian
       POSTGRES_PASSWORD_FILE: /run/secrets/POSTGRES_PASSWORD
       POSTGRES_DB: minirest
+    secrets:
+      - POSTGRES_PASSWORD
 
   nginx:
     image: nginx:latest
@@ -33,6 +33,8 @@ services:
       - postgres
     networks:
       - network
+    environment:
+      SECRET_KEY: /run/secrets/DJANGO_SECRET_KEY
     volumes:
       - static:/home/minirest/staticfiles
       - media:/home/minirest/media
