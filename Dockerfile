@@ -1,12 +1,12 @@
 FROM python:3.9.0
 
-WORKDIR /home/
+WORKDIR /home/ubuntu/
 
 RUN echo "server test ver2"
 
 RUN git clone https://github.com/kidsage/minirest.git
 
-WORKDIR /home/minirest/
+WORKDIR /home/ubuntu/minirest
 
 RUN pip install -r requirements.txt
 

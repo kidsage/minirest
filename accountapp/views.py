@@ -10,13 +10,13 @@ from accountapp.forms import AccountUpdateForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 # from django.views.decorators.csrf import csrf_exempt
+# from django.views.decorators.csrf import csrf_protect
 
 from articleapp.models import Article
 
 # Create your views here.
 
 has_ownership = [account_ownership_required, login_required]
-
 
 class AccountCreateView(CreateView):
     model = User
