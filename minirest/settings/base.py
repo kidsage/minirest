@@ -127,6 +127,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # COOKIE SETTINGS
 
+CSRF_TRUSTED_ORIGINS = [
+    "http://www.minirest.site", 
+    "https://www.minirest.site"
+]
 # CSRF_COOKIE_SECURE = True
 # SESSION_COOKIE_SECURE = True
 # CSRF_COOKIE_SAMESITE = 'None'
