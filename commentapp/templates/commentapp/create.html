@@ -13,7 +13,7 @@
                 <input type="submit" class="btn btn-dark rounded-pill col-3 mt-3">
             {% else %}
                 <a href="{% url 'accountapp:login' %}?next={{ request.path }}" class="btn btn-dark rounded-pill col-3 mt-3">
-                    Login
+                    로그인
                 </a>
             {% endif %}
             <!-- 브라우저에서 조작이 가능한 형태 

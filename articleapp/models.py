@@ -12,6 +12,18 @@ class Article(models.Model):
     image = models.ImageField(upload_to='article/', null=False)
     content = models.TextField(null=True)
     created_at = models.DateField(auto_created=True, null=True)
+    liked_user = models.ManyToManyField(User, through='Like', related_name='like')
 
     class Meta:
         ordering = ['-pk']
+
+    def __str__(self):
+        return self.liked_user
+
+
+class Like(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='like_user')
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='like_article')
+
+    class Meta:
+        unique_together = ('user', 'article')

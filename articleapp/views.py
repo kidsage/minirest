@@ -1,14 +1,19 @@
+from django import views
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
+from django.views import View
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView, RedirectView
 from django.contrib.auth.decorators import login_required
 from articleapp.decorators import article_ownership_required
 from django.views.generic.edit import FormMixin
 
 from articleapp.forms import ArticleCreationForm
-from articleapp.models import Article
+from articleapp.models import Article, Like
 from commentapp.forms import CommentCreationForm
 
+import json
 
 # Create your views here.
 @method_decorator(login_required, 'get')
@@ -65,3 +70,24 @@ class ArticleListView(ListView):
     context_object_name = 'article_list'
     template_name = 'articleapp/list.html'
     paginate_by = 30 # page 당 article 개수 (테스트중)
+
+
+@method_decorator(login_required, 'get')
+class ArticleLikesView(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        return reverse('articleapp:detail', kwargs={'pk': kwargs['pk']})
+
+    def get(self, request, *args, **kwargs):
+        user = self.request.user
+        article = get_object_or_404(Article, pk=kwargs['pk'])
+
+        if Like.objects.filter(user=user, article=article).exists():
+            article.liked_user.remove()
+            Like.objects.filter(user=user, article=article).delete()
+            return HttpResponseRedirect(reverse('articleapp:detail', kwargs={'pk':kwargs['pk']}))
+        else:
+            article.liked_user.add()
+            Like(user=user, article=article).save()
+            # return HttpResponseRedirect(reverse('articleapp:detail', kwargs={'pk':kwargs['pk']}))
+
+        return super(ArticleLikesView, self).get(self.request, *args, **kwargs)

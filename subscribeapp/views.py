@@ -36,7 +36,7 @@ class SubscriptionListView(ListView):
     model = Article
     context_object_name = 'article_list'
     template_name = 'subscribeapp/list.html'
-    paginate_by = 5
+    paginate_by = 10
 
     def get_queryset(self):
         projects = Subscription.objects.filter(user=self.request.user).values_list('project') # 값들을 리스트화 시킴
