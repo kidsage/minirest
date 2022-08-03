@@ -39,8 +39,8 @@ Temporary Items
 .apdisk
 
 # Local files
-/db.sqlite3
 .env
 .idea/
 __pycache__/
 media/
+config/
