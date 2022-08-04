@@ -5,6 +5,7 @@ from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView, RedirectView
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from articleapp.decorators import article_ownership_required
 from django.views.generic.edit import FormMixin
@@ -84,10 +85,12 @@ class ArticleLikesView(RedirectView):
         if Like.objects.filter(user=user, article=article).exists():
             article.liked_user.remove()
             Like.objects.filter(user=user, article=article).delete()
+            messages.add_message(self.request, messages.ERROR, '좋아요가 취소되었습니다.')
             return HttpResponseRedirect(reverse('articleapp:detail', kwargs={'pk':kwargs['pk']}))
         else:
             article.liked_user.add()
             Like(user=user, article=article).save()
+            messages.add_message(self.request, messages.SUCCESS, '좋아요가 반영되었습니다.')
             # return HttpResponseRedirect(reverse('articleapp:detail', kwargs={'pk':kwargs['pk']}))
 
         return super(ArticleLikesView, self).get(self.request, *args, **kwargs)

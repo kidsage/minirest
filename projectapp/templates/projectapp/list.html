@@ -35,8 +35,8 @@
     </div>
     <script src="{% static 'js/magicgrid.js' %}"></script>
     {% else %}
-    <div style="text-align: center;">
-        <h1>No Projects Yet!</h1>
+    <div style="display: flex; align-items: center; flex-direction: row; justify-content: center; height: 200px;">
+        <h1>아직 모아보기 분류가 없습니다.</h1>
     </div>
     {% endif %}
 
@@ -44,7 +44,7 @@
 
     <div style="text-align: center;">
         <a href="{% url 'projectapp:create' %}" class="btn btn-dark rounded-pill px-3 mt-3 mb-3">
-            Create Project
+            모아보기 만들기
         </a>
     </div>
 

@@ -7,6 +7,12 @@
     
     {% include 'header.html' %}
 
+    {% for message in messages %}
+    <div class="alert {{ message.tags }} alert-auto-dismissible alert-dismissible notification-container text-center" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+
     {% block content %}
     {% endblock %}
 
