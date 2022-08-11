@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views import View
-from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView, RedirectView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView, RedirectView, TemplateView
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from articleapp.decorators import article_ownership_required
@@ -28,6 +28,7 @@ class ArticleCreateView(CreateView):
         temp_article = form.save(commit=False)
         temp_article.writer = self.request.user
         temp_article.save()
+        form.save_m2m()
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -47,7 +48,6 @@ class ArticleUpdateView(UpdateView):
     model = Article
     context_object_name = 'target_article'
     form_class = ArticleCreationForm
-    # success_url = 
     template_name = 'articleapp/update.html'
 
     def get_success_url(self):
@@ -94,3 +94,20 @@ class ArticleLikesView(RedirectView):
             # return HttpResponseRedirect(reverse('articleapp:detail', kwargs={'pk':kwargs['pk']}))
 
         return super(ArticleLikesView, self).get(self.request, *args, **kwargs)
+
+
+class TagCloudView(TemplateView):
+    template_name = 'articleapp/taggit/cloud.html'
+
+
+class TaggedObjectView(ListView):
+    model = Article
+    template_name = 'articleapp/taggit/list.html'
+    
+    def get_queryset(self):
+        return Article.objects.filter(tags_name=self.kwargs.get('tag'))
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tagname'] = self.kwargs['tag']
+        return context

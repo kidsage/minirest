@@ -41,9 +41,23 @@
                 <span style="text-align: left; font-size: 1.2rem;">
                     {{ target_article.liked_user.first }} 님 포함 {{ target_article.liked_user.count }}명이 이 게시물을 좋아합니다.
                 </span>
-                <h5>
+                <!-- TAGGIT PART -->
+                <br><br>
+                <div>
+                    <i class="fas fa-tags" aria-hidden="true"></i>&nbsp; 태그:
+                    {% load taggit_templatetags2_tags %}
+                    {% get_tags_for_object object as "tags" %}
+                    {% for tag in tags %}
+                        <a href="{% url 'articleapp:tagged_object_list' tag.name %}">
+                            {{ tag.name }}
+                        </a>
+                    {% endfor %}
                     
-                </h5>
+                    &emsp;
+                    <a href="{% url 'articleapp:tag_cloud' %}">
+                        <span class="btn btn-info btn-sm rounded-pill">tagcloud</span>
+                    </a>
+                </div>
             </div>
 
             {% for comment in target_article.comment.all %}

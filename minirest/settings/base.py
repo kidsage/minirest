@@ -29,6 +29,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_bootstrap5',
+    'taggit.apps.TaggitAppConfig',
+    'taggit_templatetags2',
     'accountapp',
     'profileapp',
     'articleapp',
@@ -125,6 +127,7 @@ LOGOUT_REDIRECT_URL = reverse_lazy('accountapp:login')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+
 # COOKIE SETTINGS
 
 CSRF_TRUSTED_ORIGINS = [
@@ -147,3 +150,8 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+
+
+# TAGGIT SETTINGS
+TAGGIT_CASE_INSENSITIVE = True
+TAGGIT_LIMIT = 50

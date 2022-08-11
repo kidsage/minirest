@@ -1,5 +1,6 @@
 from django import forms
 from django.forms import ModelForm
+from taggit.forms import TagField
 
 from articleapp.models import Article
 from projectapp.models import Project
@@ -14,4 +15,4 @@ class ArticleCreationForm(ModelForm):
 
     class Meta:
         model = Article
-        fields = ['project', 'title', 'image', 'content']
+        fields = ['project', 'title', 'image', 'content', 'tags']

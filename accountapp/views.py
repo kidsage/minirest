@@ -21,7 +21,7 @@ has_ownership = [account_ownership_required, login_required]
 class AccountCreateView(CreateView):
     model = User
     form_class = AccountCreateForm
-    success_url = reverse_lazy('articleapp:list')
+    success_url = reverse_lazy('profileapp:create')
     template_name = 'accountapp/create.html'
 
 
@@ -43,7 +43,7 @@ class AccountUpdateView(UpdateView):
     model = User
     context_object_name = 'target_user'
     form_class = AccountUpdateForm
-    success_url = reverse_lazy('articleapp:list')
+    success_url = reverse_lazy('home')
     template_name = 'accountapp/update.html'
 
 
@@ -52,5 +52,5 @@ class AccountUpdateView(UpdateView):
 class AccountDeleteView(DeleteView):
     model = User
     context_object_name = 'target_user'
-    success_url = reverse_lazy('articleapp:list')
+    success_url = reverse_lazy('articleapp:login')
     template_name = 'accountapp/delete.html'
