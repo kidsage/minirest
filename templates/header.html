@@ -2,12 +2,19 @@
 <!-- margin 두 값중 앞은 상하, 뒤는 좌우 -->
 <div class="minirest_header">
     <div>
-        <h1 class="minirest_logo">
+        <h1 class="minirest_logo" style="font-size: 30px;">
             <a href="{% url 'articleapp:list' %}">
                 Minirest
             </a>
         </h1>
+        <form class="form-inline my-2 my-lg-0" style="text-align: center;" action="{% url 'searchapp:search' %}" method="get">
+            {% csrf_token %}
+            <input class="form-control mr-sm-2" type="search" placeholder="검색" aria-label="검색" name="q">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit" ><i class="fas fa-search"></i></button>
+        </form>
     </div>
+    
+
     <div class="minirest_header_navbar">
         <a href="{% url 'articleapp:list' %}" class="minirest_header_nav">
             <span>전체게시물</span>

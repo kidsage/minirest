@@ -12,6 +12,7 @@ class ArticleCreationForm(ModelForm):
 
     # modelchoicefield는 queryset이 필수
     project = forms.ModelChoiceField(queryset=Project.objects.all(), required=False) 
+    tags = TagField()
 
     class Meta:
         model = Article

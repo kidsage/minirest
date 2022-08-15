@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+
+<div style="text-align: center;">
+    <p>다음 단어로 검색한 결과입니다.: <b>"{{ word }}"</b></p>
+</div>
+<div style="text-align: center;">
+    {% for article in article_list %}
+        <a href="{% url 'articleapp:detail' pk=article.pk %}">
+            {% include 'snippets/card.html' with article=article %}
+        </a>
+        {% empty %}
+        <div>
+            <p>결과물을 찾지 못했습니다.</p>
+        </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}
