@@ -4,20 +4,20 @@
     <!-- 어떤 페이지에서 불러와도 get parameter만 적용할 수 있도록 수정 -->
     <!-- <a href="{% url 'articleapp:list' %}?page={{ page_obj.previous_page_number }}" -->
     <a href="?page={{ page_obj.previous_page_number }}"
-       class="btn btn-secondary rounded-pill">
+       class="btn btn-light btn-sm rounded-pill">
        {{ page_obj.previous_page_number }}
     </a>
     {% endif %}
     <!-- <a href="{% url 'articleapp:list' %}?page={{ page_obj.number }}" -->
     <a href="?page={{ page_obj.number }}"
-       class="btn btn-secondary rounded-pill">
+       class="btn btn-light btn-sm rounded-pill">
        {{ page_obj.number }}
     </a>
     <!-- 현재 페이지에서 다음 페이지를 확인 -->
     {% if page_obj.has_next %}
     <!-- <a href="{% url 'articleapp:list' %}?page={{ page_obj.next_page_number }}" -->
     <a href="?page={{ page_obj.next_page_number }}"
-       class="btn btn-secondary rounded-pill">
+       class="btn btn-light btn-sm rounded-pill">
        {{ page_obj.next_page_number }}
     </a>
     {% endif %}
