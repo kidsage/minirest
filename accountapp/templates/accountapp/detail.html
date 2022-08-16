@@ -5,30 +5,28 @@
     <div>
         <div style="text-align: center; max-width: 700px; margin: 4rem auto;">
             {% if target_user.profile %}
-            <img src="{{ target_user.profile.image.url }}" alt="" style="height: 20rem; width: 20rem; border-radius: 10rem; margin-bottom: 3rem; object-fit: cover;">
-            <h2 style="font-family: 'NanumSquareB';">
-                {{ target_user.profile.nickname }}
-                {% if target_user == user %}
-                <a class="material-icons" href="{% url 'profileapp:update' pk=target_user.profile.pk %}">edit</a>
-                {% endif %}
-            </h2>
-            <h4 style="margin-bottom: 3rem;">{{ target_user.profile.message }}</h4>
+                <img src="{{ target_user.profile.image.url }}" alt="" style="height: 20rem; width: 20rem; border-radius: 10rem; margin-bottom: 3rem; object-fit: cover;">
+                <h2 style="font-family: 'NanumSquareB';">
+                    {{ target_user.profile.nickname }}
+                </h2>
+                <h4 style="margin: 2rem 3rem;">{{ target_user.profile.message }}</h4>
             {% else %}
                 {% if target_user == user %}
                     <h2 style="font-family: 'NanumSquareB';">프로필을 만들어주세요</h2>
-                    <a class="material-icons" style="margin-right: 1rem;" href="{% url 'profileapp:create' %}"><p>personadd</p></a>
+                    <a style="margin-right: 1rem;" href="{% url 'profileapp:create' %}"><p>프로필 생성</p></a>
                 {% else %}
                     <h2>닉네임을 설정하지 않은 유저입니다</h2>
                 {% endif %}
             {% endif %}
             {% if target_user == user %}
-            <a class="material-icons" style="margin-right: 1rem;" href="{% url 'accountapp:update' pk=user.pk %}"><p>settings</p>
-            </a>
-            <a class="material-icons" style="color: #EF3838;" href="{% url 'accountapp:delete' pk=user.pk %}"><p>cancel</p>
-            </a><br>
-            <a href="{% url 'articleapp:create' %}" class="btn btn-dark btn-sm rounded-pill">글쓰기</a>
+            <div style="width: 30%; height: 200px; float: left;"><a class="fw-bold" href="{% url 'accountapp:update' pk=user.pk %}"><p>프로필 수정</p></a></div>
+            <div style="width: 40%; height: 200px; float: left;"><a class="fw-bold" href="{% url 'accountapp:delete' pk=user.pk %}"><p>아이디 삭제</p></a></div>
+            <div style="width: 30%; height: 200px; float: right;"><a class="fw-bold" href="{% url 'accountapp:logout' %}?next={{ request.path }}"><p>로그아웃</p></a></div>
             {% endif %}
-        </div><br><br>
-        <div>{% include 'snippets/list_fragment.html' with article_list=object_list %}</div>
+            <br>
+        </div>
+        <div style="clear: both;">
+            {% include 'snippets/list_fragment.html' with article_list=object_list %}
+        </div>
     </div>
 {% endblock %}

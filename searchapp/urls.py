@@ -1,9 +1,9 @@
 from django.urls import path
 
-from searchapp.views import SearchFormView
+from searchapp.views import SearchListView
 
 app_name = 'searchapp'
 
 urlpatterns = [
-    path('', SearchFormView.as_view(), name='search'),
+    path('', SearchListView.as_view(), name='search'),
 ]

@@ -32,19 +32,17 @@
 </style>
 
 <div>
-    <div style="text-align: center;">
-        <p>다음 단어로 검색한 결과입니다.: <b>"{{ query | safe }}"</b></p>
+    <!-- <div style="text-align: center;">
+        <p>다음 단어로 검색한 결과입니다.: <b>"{{ query }}"</b></p>
     </div>
-    <br>
+    <br> -->
     <div class="container">
         {% for article in object_list %}
             <a href="{% url 'articleapp:detail' pk=article.pk %}">
                 {% include 'snippets/card.html' with article=article %}
             </a>
         {% empty %}
-            <div>
-                <p>결과물을 찾지 못했습니다.</p>
-            </div>
+            <div><p>결과물을 찾지 못했습니다.</p></div>
         {% endfor %}
         <script src="{% static 'js/magicgrid.js' %}"></script>
     </div>

@@ -5,11 +5,12 @@ from articleapp.models import Article
 
 
 # Create your views here.
-class SearchFormView(ListView):
+class SearchListView(ListView):
     model = Article
     template_name = 'searchapp/search.html'
     context_object_name = 'search_list'
     paginate_by = 20
+    paginate_orphans = 5
 
     def get_queryset(self):
         query = self.request.GET.get('q')
@@ -20,8 +21,19 @@ class SearchFormView(ListView):
                 Q(title__icontains=query) | Q(content__icontains=query)
             )
 
-        context = {}
-        context['object_list'] = object_list
-        context['query'] = query
+        return object_list
+
+        # context = {}
+        # context['object_list'] = object_list
+        # context['query'] = query
+
+        # return context
+
+    def get_context_data(self, **kwargs):
+        context = super(SearchListView, self).get_context_data()
+        page = context['page_obj']
+        paginator = page.paginator
+        pagelist = paginator.get_elided_page_range(page.number, on_each_side=3, on_ends=0)
+        context['pagelist'] = pagelist
 
         return context

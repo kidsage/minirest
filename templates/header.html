@@ -1,4 +1,4 @@
-<div class="minirest_header">
+<!-- <div class="minirest_header">
     <div>
         <h1 class="minirest_logo">
             <a href="{% url 'articleapp:list' %}">
@@ -37,4 +37,41 @@
         </a>
         {% endif %}
     </div>
+</div> -->
+
+{% load static %}
+
+<div class="minirest-header">
+    <nav class="navbar navbar-expand-lg navbar-white bg-white">
+        <div class="container-fluid">
+            <a class="navbar-brand minirest_logo h1" style="color: darkred;" href="{% url 'articleapp:list' %}">Minirest</a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <ul class="navbar-nav me-2">
+                <a href="{% url 'articleapp:create' %}" class="btn border-light rounded-pill" style="background-color: #E2E2E2;">만들기</a>
+            </ul>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <form class="d-flex" style="width: 88%;" action="{% url 'searchapp:search' %}" method="get">
+                    {% csrf_token %}
+                    <a class="material-icons" style="margin-right: 1rem;" href="{% url 'profileapp:create' %}"><p>search</p></a>
+                    <input class="form-control me-2 rounded-pill" style="color: black; background-color: #E2E2E2;" type="search" placeholder="제목이나 내용을 검색해 보세요." aria-label="Search" name="q">
+                </form>
+                <ul class="navbar-nav">
+                    {% if not user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'accountapp:login' %}?next={{ request.path }}">로그인</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'accountapp:create' %}">가입하기</a></li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold" href="{% url 'accountapp:detail' pk=user.pk %}">
+                            <img src="{{ target_user.profile.image.url }}" alt="" style="width: 3rem; height: 3rem; border-radius: 10rem; object-fit: cover;">
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+    </div>
+    </nav>
 </div>
+<br><br><br><br>
