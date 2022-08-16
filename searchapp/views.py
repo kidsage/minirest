@@ -1,20 +1,27 @@
-from django.urls import reverse_lazy
-from django.views.generic.edit import FormView
-from articleapp.models import Article
+from django.views.generic import ListView
+from django.db.models import Q
 
-from searchapp.forms import SearchForm
+from articleapp.models import Article
 
 
 # Create your views here.
-class SearchFormView(FormView):
-    form_class = SearchForm
+class SearchFormView(ListView):
+    model = Article
     template_name = 'searchapp/search.html'
+    context_object_name = 'search_list'
+    paginate_by = 20
 
-    def form_valid(self, form):
-        word = form.cleaned_data['word']
-        article_list = Article.objects.filter(Q(title__icontains=word) | Q(content__icontains=word)).distinct()
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        object_list = self.model.objects.all()
+        
+        if query:
+            object_list = object_list.filter(
+                Q(title__icontains=query) | Q(content__icontains=query)
+            )
 
         context = {}
-        context['article_list'] = article_list
-        context['word'] = word
+        context['object_list'] = object_list
+        context['query'] = query
+
         return context

@@ -1,22 +1,53 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
+{% load static %}
 
 {% block content %}
 
-<div style="text-align: center;">
-    <p>다음 단어로 검색한 결과입니다.: <b>"{{ word }}"</b></p>
-</div>
-<div style="text-align: center;">
-    {% for article in article_list %}
-        <a href="{% url 'articleapp:detail' pk=article.pk %}">
-            {% include 'snippets/card.html' with article=article %}
-        </a>
+<style>
+
+    .container {
+        padding: 0;
+        margin: 0, auto;
+        display: flex;
+    }
+
+    .container a {
+        width: 45%;
+        max-width: 250px;
+    }
+
+    .container div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 1rem;
+    }
+
+    .container img {
+        width: 100%;
+        border-radius: 1rem;
+    }
+
+</style>
+
+<div>
+    <div style="text-align: center;">
+        <p>다음 단어로 검색한 결과입니다.: <b>"{{ query | safe }}"</b></p>
+    </div>
+    <br>
+    <div class="container">
+        {% for article in object_list %}
+            <a href="{% url 'articleapp:detail' pk=article.pk %}">
+                {% include 'snippets/card.html' with article=article %}
+            </a>
         {% empty %}
-        <div>
-            <p>결과물을 찾지 못했습니다.</p>
-        </div>
-    {% endfor %}
+            <div>
+                <p>결과물을 찾지 못했습니다.</p>
+            </div>
+        {% endfor %}
+        <script src="{% static 'js/magicgrid.js' %}"></script>
+    </div>
+    {% include 'snippets/pagination.html' with page_obj=page_obj %}
 </div>
-
-
 {% endblock %}
