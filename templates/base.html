@@ -3,14 +3,14 @@
 
 {% include 'head.html' %}
 
-<body style="width: 100%; height: auto; font-family: 'NanumSquareR'; margin: 1rem 1rem; ">
+<body style="max-width: 1900px; width: 100%; height: auto; font-family: 'NanumSquareR';">
     
     {% include 'header.html' %}
 
     {% for message in messages %}
-    <div class="alert {{ message.tags }} alert-auto-dismissible alert-dismissible notification-container text-center" role="alert">
-        {{ message }}
-    </div>
+    {% if message.tags %}
+    <script>alert("{{ message }}")</script>
+    {% endif %}
     {% endfor %}
 
     {% block content %}
