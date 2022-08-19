@@ -5,7 +5,7 @@
     <div>
         <div style="text-align: center; max-width: 700px; margin: 4rem auto;">
             {% if target_user.profile %}
-                <img src="{{ target_user.profile.image.url }}" alt="" style="height: 20rem; width: 20rem; border-radius: 10rem; margin-bottom: 3rem; object-fit: cover;">
+                <img src="{{ target_user.profile.image.url }}" alt="" style="height: 15rem; width: 15rem; border-radius: 10rem; margin-bottom: 3rem; object-fit: cover;">
                 <h2 style="font-family: 'NanumSquareB';">
                     {{ target_user.profile.nickname }}
                 </h2>
@@ -19,9 +19,12 @@
                 {% endif %}
             {% endif %}
             {% if target_user == user %}
-            <div style="width: 30%; height: 200px; float: left;"><a class="fw-bold" href="{% url 'accountapp:update' pk=user.pk %}"><p>프로필 수정</p></a></div>
-            <div style="width: 40%; height: 200px; float: left;"><a class="fw-bold" href="{% url 'accountapp:delete' pk=user.pk %}"><p>아이디 삭제</p></a></div>
-            <div style="width: 30%; height: 200px; float: right;"><a class="fw-bold" href="{% url 'accountapp:logout' %}?next={{ request.path }}"><p>로그아웃</p></a></div>
+            <div style="display: inline-block; vertical-align: middle;">
+                <a class="fw-bold" style="margin-right: 2rem;" href="{% url 'accountapp:update' pk=user.pk %}"><span>프로필 수정</span></a>
+                <a class="fw-bold" style="margin-right: 2rem;" href="{% url 'accountapp:delete' pk=user.pk %}"><span>아이디 삭제</span></a>
+                <a class="fw-bold" style="margin-right: 2rem;" href="{% url 'projectapp:list' %}"><span>모아보기</span></a>
+                <a class="fw-bold" href="{% url 'subscribeapp:list' %}"><span>구독목록</span></a>
+            </div>
             {% endif %}
             <br>
         </div>
@@ -30,3 +33,11 @@
         </div>
     </div>
 {% endblock %}
+
+
+<!-- <a href="{% url 'projectapp:list' %}" class="minirest_header_nav">
+    <span>모아보기</span>
+</a>
+<a href="{% url 'subscribeapp:list' %}" class="minirest_header_nav">
+    <span>구독</span>
+</a> -->
