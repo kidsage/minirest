@@ -12,12 +12,12 @@
                 <h4 style="margin: 2rem 3rem;">{{ target_user.profile.message }}</h4>
             {% else %}
                 {% if target_user == user %}
-                    <h2 style="font-family: 'NanumSquareB';">프로필을 만들어주세요</h2>
-                    <a style="margin-right: 1rem;" href="{% url 'profileapp:create' %}"><p>프로필 생성</p></a>
+                    <a style="margin-right: 1rem;" href="{% url 'profileapp:create' %}"><h2>프로필 생성</h2></a>
                 {% else %}
                     <h2>닉네임을 설정하지 않은 유저입니다</h2>
                 {% endif %}
             {% endif %}
+            <br>
             {% if target_user == user %}
             <div style="display: inline-block; vertical-align: middle;">
                 <a class="fw-bold" style="margin-right: 2rem;" href="{% url 'accountapp:update' pk=user.pk %}"><span>프로필 수정</span></a>

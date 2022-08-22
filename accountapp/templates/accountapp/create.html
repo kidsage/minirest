@@ -3,15 +3,19 @@
 
 {% block content %}
 
-    <div style="text-align: left; max-width: 500px; margin: 4rem auto;">
-        <div class="mb-4" style="text-align: center;">
-            <h4>회원가입</h4>
-        </div>
-        <form action="{% url 'accountapp:create' %}" method="post">
-            {% csrf_token %}
-            {% bootstrap_form form %}
-            <input type="submit" class="btn btn-dark rounded-pill col-3 mt-3"> 
-        </form>
+{% if form.errors %}
+<p class="text-center">양식을 다시 한번 확인해 주시기 바랍니다.</p>
+{% endif %}
+
+<div style="text-align: left; max-width: 500px; margin: 4rem auto;">
+    <div class="mb-4" style="text-align: center;">
+        <h4>회원가입</h4>
     </div>
+    <form action="{% url 'accountapp:create' %}" method="post" class="text-center">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input type="submit" class="btn btn-dark rounded-pill col-3 mt-3"> 
+    </form>
+</div>
 
 {% endblock %}
