@@ -7,7 +7,7 @@
     <div style="display: flex; width: 400px; height: 300px; float: left; margin-left: 150px;">
         <img src="{{ target_article.image.url }}" alt="" style="border: 1rem sloid; border-radius: 3rem; max-width: 100%; max-height: 100%; object-fit: fill;">
     </div>
-    <div class="text-start" style="width: 500px; height: 400px; padding-left: 5px; float: right;">
+    <div class="text-start" style="display: inline-flexbox; width: 500px; height: 400px; padding-left: 5px; float: right;">
         <h1>{{ target_article.title }}</h1>
         <div style="text-align: left; font-size: 1rem;">
             <a href="{% url 'articleapp:like' pk=target_article.pk %}">
@@ -53,7 +53,7 @@
     <div style="clear: both;"></div>
     <br><br>
 
-    <div style="max-width: 600px; margin: auto;">
+    <div style="max-width: 500px; margin: auto;">
         {% for comment in target_article.comment.all %}
             {% include 'commentapp/detail.html' with comment=comment %}
         {% endfor %}

@@ -6,8 +6,12 @@
         <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button> -->
-        <div class="navbar-nav ms-2 me-3">
-            <a href="{% url 'articleapp:create' %}">만들기</a>
+        <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">만들기</a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item" href="{% url 'articleapp:create' %}">글쓰기</a></li>
+                <li><a class="dropdown-item" href="{% url 'projectapp:create' %}">모아보기 만들기</a></li>
+            </ul>
         </div>
         <form class="d-flex" style="width: 75%;" action="{% url 'searchapp:search' %}" method="get">
             {% csrf_token %}
