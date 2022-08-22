@@ -10,7 +10,7 @@
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">만들기</a>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <li><a class="dropdown-item" href="{% url 'articleapp:create' %}">글쓰기</a></li>
-                <li><a class="dropdown-item" href="{% url 'projectapp:create' %}">모아보기 만들기</a></li>
+                <li><a class="dropdown-item" href="{% url 'projectapp:create' %}">핀 카테고리 만들기</a></li>
             </ul>
         </div>
         <form class="d-flex" style="width: 75%;" action="{% url 'searchapp:search' %}" method="get">

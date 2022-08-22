@@ -22,8 +22,8 @@
             <div style="display: inline-block; vertical-align: middle;">
                 <a class="fw-bold" style="margin-right: 2rem;" href="{% url 'accountapp:update' pk=user.pk %}"><span>프로필 수정</span></a>
                 <a class="fw-bold" style="margin-right: 2rem;" href="{% url 'accountapp:delete' pk=user.pk %}"><span>아이디 삭제</span></a>
-                <a class="fw-bold" style="margin-right: 2rem;" href="{% url 'projectapp:list' %}"><span>모아보기</span></a>
-                <a class="fw-bold" href="{% url 'subscribeapp:list' %}"><span>구독목록</span></a>
+                <a class="fw-bold" style="margin-right: 2rem;" href="{% url 'projectapp:list' %}"><span>핀 리스트</span></a>
+                <a class="fw-bold" href="{% url 'subscribeapp:list' %}"><span>구독 리스트</span></a>
             </div>
             {% endif %}
             <br>
@@ -33,11 +33,3 @@
         </div>
     </div>
 {% endblock %}
-
-
-<!-- <a href="{% url 'projectapp:list' %}" class="minirest_header_nav">
-    <span>모아보기</span>
-</a>
-<a href="{% url 'subscribeapp:list' %}" class="minirest_header_nav">
-    <span>구독</span>
-</a> -->

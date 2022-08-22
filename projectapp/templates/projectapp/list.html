@@ -25,28 +25,29 @@
     }
 
 </style>
-    {% if project_list %}
-    <div class="container">
-        {% for project in project_list %}
-        <a href="{% url 'projectapp:detail' pk=project.pk %}">
-            {% include 'snippets/card_project.html' with project=project %}
-        </a>
-        {% endfor %}
-    </div>
-    <script src="{% static 'js/magicgrid.js' %}"></script>
-    {% else %}
-    <div style="display: flex; align-items: center; flex-direction: row; justify-content: center; height: 200px;">
-        <h1>아직 모아보기 분류가 없습니다.</h1>
-    </div>
-    {% endif %}
 
-    {% include 'snippets/pagination.html' with page_obj=page_obj %}
+{% if project_list %}
+<div class="container">
+    {% for project in project_list %}
+    <a href="{% url 'projectapp:detail' pk=project.pk %}">
+        {% include 'snippets/card_project.html' with project=project %}
+    </a>
+    {% endfor %}
+</div>
+<script src="{% static 'js/magicgrid.js' %}"></script>
+{% else %}
+<div>
+    <h1>아직 핀 카테고리가 없습니다.</h1>
+</div>
+{% endif %}
 
-    <div style="text-align: center;">
-        <a href="{% url 'projectapp:create' %}" class="btn btn-dark rounded-pill px-3 mt-3 mb-3">
-            모아보기 만들기
-        </a>
-    </div>
+{% include 'snippets/pagination.html' with page_obj=page_obj %}
+
+<div style="text-align: center;">
+    <a href="{% url 'projectapp:create' %}" class="btn btn-dark rounded-pill px-3 mt-3 mb-3">
+        핀 카테고리 만들기
+    </a>
+</div>
 
 
 {% endblock %}

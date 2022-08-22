@@ -1,0 +1,9 @@
+<div style="display: block; text-align: center; font-family: 'NanumSquareR';">
+    <img style="border-radius: 1rem" src="{{ article.image.url }}" alt="">
+    <div>
+        <img style="width: 1.5rem; height: 1.5rem; border-radius: 10rem; object-fit: cover; margin-left: 1rem;" src="{{ article.writer.profile.image.url }}" alt="">
+        <h6 style="margin: 5%;">
+            {{ article.writer.profile.nickname | truncatechars:10 }}
+        </h6>
+    </div>
+</div>
