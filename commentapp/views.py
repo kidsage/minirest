@@ -1,11 +1,12 @@
+from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic import CreateView, DeleteView, UpdateView
 from commentapp.decorators import comment_ownership_required
-from commentapp.forms import CommentCreationForm
+from commentapp.forms import CommentCreationForm, CommentReplyForm
 from django.utils.decorators import method_decorator
 
 from articleapp.models import Article
-from commentapp.models import Comment
+from commentapp.models import Comment, reply
 
 # Create your views here.
 
@@ -45,3 +46,17 @@ class CommentUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse('articleapp:detail', kwargs={'pk' : self.object.pk})
+
+
+class CommentReplyView(CreateView):
+    model = reply
+    form_class = CommentReplyForm
+    context_object_name = 'target_reply'
+
+    def form_valid(self, form):
+        temp_comment = form.save(commit=False)
+        temp_comment.save()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return HttpResponseRedirect(reverse('commentapp:detail', kwargs={'pk':self.object.pk}))

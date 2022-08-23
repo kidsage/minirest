@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 
-from commentapp.models import Comment
+from commentapp.models import Comment, reply
 
 
 class CommentCreationForm(ModelForm):
@@ -14,3 +14,10 @@ class CommentCreationForm(ModelForm):
     class Meta:
         model = Comment
         fields = ['content']
+
+
+class CommentReplyForm(ModelForm):
+
+    class Meta:
+        model = reply
+        fields = ['comment', 'content']

@@ -9,3 +9,13 @@ class Comment(models.Model):
     writer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='comment')
     content = models.TextField(null=False)
     created_at = models.DateTimeField(auto_now=True)
+    # reply = models.ForeignKey('self', on_delete=models.CASCADE, null=True)
+
+
+class reply(models.Model):
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    content = models.TextField(null=False)
+    created_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.content
