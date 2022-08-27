@@ -23,11 +23,6 @@ class SearchListView(ListView):
 
         return object_list
 
-        # context = {}
-        # context['object_list'] = object_list
-        # context['query'] = query
-
-        # return context
 
     def get_context_data(self, **kwargs):
         context = super(SearchListView, self).get_context_data()

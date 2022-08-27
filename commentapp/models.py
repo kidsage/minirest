@@ -12,8 +12,9 @@ class Comment(models.Model):
     # reply = models.ForeignKey('self', on_delete=models.CASCADE, null=True)
 
 
-class reply(models.Model):
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+class Reply(models.Model):
+    comment = models.ForeignKey(Comment, on_delete=models.SET_NULL, null=True, blank=True)
+    writer = models.ForeignKey(User, on_delete=models.PROTECT, null=True, related_name='reply')
     content = models.TextField(null=False)
     created_at = models.DateTimeField(auto_now=True)
 

@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 
-from commentapp.models import Comment, reply
+from commentapp.models import Comment, Reply
 
 
 class CommentCreationForm(ModelForm):
@@ -19,5 +19,8 @@ class CommentCreationForm(ModelForm):
 class CommentReplyForm(ModelForm):
 
     class Meta:
-        model = reply
+        model = Reply
         fields = ['comment', 'content']
+        labels = {
+            'content' : '댓글내용',
+        }

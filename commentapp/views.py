@@ -6,7 +6,7 @@ from commentapp.forms import CommentCreationForm, CommentReplyForm
 from django.utils.decorators import method_decorator
 
 from articleapp.models import Article
-from commentapp.models import Comment, reply
+from commentapp.models import Comment, Reply
 
 # Create your views here.
 
@@ -49,7 +49,7 @@ class CommentUpdateView(UpdateView):
 
 
 class CommentReplyView(CreateView):
-    model = reply
+    model = Reply
     form_class = CommentReplyForm
     context_object_name = 'target_reply'
 
