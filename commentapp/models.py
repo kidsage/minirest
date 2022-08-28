@@ -11,6 +11,9 @@ class Comment(models.Model):
     created_at = models.DateTimeField(auto_now=True)
     # reply = models.ForeignKey('self', on_delete=models.CASCADE, null=True)
 
+    # def __str__(self):
+    #     return self.content
+
 
 class Reply(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.SET_NULL, null=True, blank=True)

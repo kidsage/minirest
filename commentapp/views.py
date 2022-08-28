@@ -54,9 +54,11 @@ class CommentReplyView(CreateView):
     context_object_name = 'target_reply'
 
     def form_valid(self, form):
-        temp_comment = form.save(commit=False)
-        temp_comment.save()
+        temp_reply = form.save(commit=False)
+        temp_reply.comment = Comment.objects.get(pk=self.request.GET.get('article_pk'))
+        temp_reply.writer = self.request.user
+        temp_reply.save()
         return super().form_valid(form)
 
     def get_success_url(self):
-        return HttpResponseRedirect(reverse('commentapp:detail', kwargs={'pk':self.object.pk}))
+        return reverse('articleapp:detail', kwargs={'pk' : self.object.article.pk})
