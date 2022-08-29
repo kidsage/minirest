@@ -16,6 +16,7 @@ class ArticleCreationForm(ModelForm):
                                                                         'style' : 'height: auto',
                                                                         'placeholder' : '내용을 입력해주세요'}))
     tags = TagField(label='태그')
+    slug = forms.SlugField()
 
     class Meta:
         model = Article
