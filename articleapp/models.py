@@ -29,10 +29,6 @@ class Article(models.Model):
     def __str__(self):
         return self.liked_user
 
-    def get_absolute_url(self):
-        return reverse('articleapp:detail', kwargs={'slug': self.slug,
-                                                    'pk': self.pk})
-
 
 class Like(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='like_user')

@@ -8,12 +8,12 @@ class Comment(models.Model):
     article = models.ForeignKey(Article, on_delete=models.SET_NULL, null=True, related_name='comment')
     writer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='comment')
     content = models.TextField(null=False)
-    created_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateField(auto_created=True, null=True)
     # reply = models.ForeignKey('self', on_delete=models.CASCADE, null=True)
 
-    # def __str__(self):
-    #     return self.content
-
+    def __str__(self):
+        return self.content
+        
 
 class Reply(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.SET_NULL, null=True, blank=True)
