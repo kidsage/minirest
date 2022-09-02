@@ -28,7 +28,7 @@ class ArticleCreateView(CreateView):
         temp_article = form.save(commit=False)
         temp_article.writer = self.request.user
         temp_article.save()
-        form.save_m2m() # save tags
+        form.save_m2m() #
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -52,7 +52,6 @@ class ArticleUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse('articleapp:detail', kwargs={'pk' : self.object.pk})
-
 
 
 @method_decorator(article_ownership_required, 'get')

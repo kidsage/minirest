@@ -7,7 +7,11 @@
             {{ comment.writer.profile.nickname }}
         </strong>
         &nbsp;&nbsp;&nbsp;
-        {{ comment.created_at | date:"Y-m-d h:m:s" }}
+        {% if comment.created_at != comment.updated_at %}
+            {{ comment.updated_at | date:"Y-m-d h:m:s" }}
+        {% else %}
+            {{ comment.created_at | date:"Y-m-d h:m:s" }}
+        {% endif %}
     </div>
     <div style="margin: 1rem 0;">
         {{ comment.content | safe }}
@@ -18,4 +22,7 @@
         <a href="{% url 'commentapp:delete' pk=comment.pk %}" class="btn btn-danger rounded-pill">삭제</a>
     </div>
     {% endif %}
+</div>
+<div>
+    
 </div>

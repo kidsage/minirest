@@ -32,20 +32,20 @@
 </style>
 
 <div>
-    <!-- <div style="text-align: center;">
-        <p>다음 단어로 검색한 결과입니다.: <b>"{{ query }}"</b></p>
+    <div style="text-align: center;">
+        <p>다음 단어로 검색한 결과입니다.: <b>"{{ word }}"</b></p>
     </div>
-    <br> -->
+    <br>
+    {% for article in object_list %}
     <div class="container">
-        {% for article in object_list %}
-            <a href="{% url 'articleapp:detail' pk=article.pk %}">
-                {% include 'snippets/card.html' with article=article %}
-            </a>
-        {% empty %}
-            <div><p>결과물을 찾지 못했습니다.</p></div>
-        {% endfor %}
-        <script src="{% static 'js/magicgrid.js' %}"></script>
+        <a href="{% url 'articleapp:detail' pk=article.pk %}">
+            {% include 'snippets/card.html' with article=article %}
+        </a>
     </div>
+    {% empty %}
+        <div class="text-center"><p>검색한 단어의 결과가 없습니다.</p></div>
+    {% endfor %}
+        <script src="{% static 'js/magicgrid.js' %}"></script>
     {% include 'snippets/pagination.html' with page_obj=page_obj %}
 </div>
 {% endblock %}
