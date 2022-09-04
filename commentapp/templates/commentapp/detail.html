@@ -8,9 +8,9 @@
         </strong>
         &nbsp;&nbsp;&nbsp;
         {% if comment.created_at != comment.updated_at %}
-            {{ comment.updated_at | date:"Y-m-d h:m:s" }}
+            {{ comment.updated_at | date:"Y-m-d H:m:s" }}
         {% else %}
-            {{ comment.created_at | date:"Y-m-d h:m:s" }}
+            {{ comment.created_at | date:"Y-m-d H:m:s" }}
         {% endif %}
     </div>
     <div style="margin: 1rem 0;">
