@@ -1,12 +1,11 @@
-<div style="border: 0.1rem solid; text-align: left; padding: 5%; margin: 1rem 0; border-radius: 1rem;
-            border-color: #bbb;">
+<div style="display: block; text-align: left; padding: 5%;">
     <div>
         <strong>
             <img src="{{ comment.writer.profile.image.url }}" alt="" style="height: 2rem; width: 2rem; border-radius: 10rem; object-fit: cover; vertical-align: middle;">
             &nbsp;
             {{ comment.writer.profile.nickname }}
         </strong>
-        {% if comment.parent_comment.name %} to <strong>{{ comment.parent_comment.name }}</strong> {% endif %}&nbsp;
+        {% if comment.parent_comment.writer %} to <strong>{{ comment.parent_comment.writer.profile.nickname }}</strong> {% endif %}&nbsp;
         <small class="text-muted">
         {% if comment.created_at != comment.updated_at %}
             {{ comment.updated_at | date:"Y-m-d H:m:s" }}
@@ -17,15 +16,17 @@
     </div>
     <div style="margin: 1rem 0;">
         <p>{{ comment.content | safe }}</p>
-        <button class="btn btn-primary btn-sm" onclick="handleReply({{ comment.id }})">대댓글</button>
-        <div id="reply-form-container-{{ comment.id }}" style="display: none;">
-            {% include 'commentapp/create.html' with article=target_article comment=comment %}
-        </div>
+        
     </div>
     {% if comment.writer == user %}
     <div style="text-align: right;">
-        <a href="{% url 'commentapp:update' pk=comment.pk %}" class="btn btn-primary rounded-pill">수정</a>
-        <a href="{% url 'commentapp:delete' pk=comment.pk %}" class="btn btn-danger rounded-pill">삭제</a>
+        <button class="btn btn-primary btn-sm rounded-pill active" type="button" onclick="handleReply({{ comment.id }})">대댓글</button>
+        <button class="btn btn-light border btn-sm rounded-pill" type="button" onclick="handleCancel({{ comment.id }})">취소</button>
+        <div id="reply-form-container-{{ comment.id }}" style="display: none;">
+            {% include 'commentapp/create.html' with article=target_article comment=comment %}
+        </div>
+        <a href="{% url 'commentapp:update' pk=comment.pk %}" class="btn btn-primary btn-sm rounded-pill">수정</a>
+        <a href="{% url 'commentapp:delete' pk=comment.pk %}" class="btn btn-danger btn-sm rounded-pill">삭제</a>
     </div>
     {% endif %}
     {% for comment in comment.get_comments %}
