@@ -11,13 +11,21 @@ class Comment(models.Model):
     content = models.TextField(null=False)
     created_at = models.DateTimeField(auto_now_add=True, null=False)
     updated_at = models.DateTimeField(auto_now=True, null=False)
-    parent_comment = models.ForeignKey('self', on_delete=models.CASCADE, null=True) # 1:N의 관계. 대댓글이 아닌 경우에는 null값이 생기니 True로 설정.
+    parent_comment = models.ForeignKey('self', on_delete=models.SET_NULL, null=True) # 1:N의 관계. 대댓글이 아닌 경우에는 null값이 생기니 True로 설정.
 
     def __str__(self):
         return self.content
 
     class Meta:
         ordering = ['-created_at']
+
+
+# class Reply(models.Model):
+#     comment = models.ForeignKey(Comment, on_delete=models.SET_NULL, null=True, blank=True)
+#     writer = models.ForeignKey(User, on_delete=models.SET_NULL)
+#     content = models.TextField()
+#     created_at = models.DateTimeField(auto_now_add=True, null=False)
+#     updated_at = models.DateTimeField(auto_now=True, null=False)
 
 
 """
@@ -30,4 +38,5 @@ comment 모델 내부에 parent 번호를 두어서 재귀호출로 사용을 �
 9/3 > 시리얼라이징을 하려고 했는데, 아싸리 따로 구현한 다음에 띄우는 방법도 간단히 사용할 수 있겠구나 생각이 듬
  > 시리얼라이징을 하면 처음에는 메인 parent comment들만 띄워놓고, 불러온 후에 댓글을 볼 수 있는 기능을 구현할 수 있음
  > 대댓글을 그냥 띄우면 따로 시리얼라이징 없이 바로 댓글 구현이 가능함.
+9/5 > 두 가지 경우 모두 진행.
 """

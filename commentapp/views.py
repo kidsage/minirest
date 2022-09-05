@@ -19,8 +19,10 @@ class CommentCreateView(CreateView):
         temp_comment = form.save(commit=False) # article pk를 입력해주기 위해 commit=false
         temp_comment.article = Article.objects.get(pk=self.request.POST['article_pk'])
         temp_comment.writer = self.request.user
-        temp_comment.parent_comment = self.request.parent_comment_id
+        parent_id = self.request.POST.get('parent_comment_id', None)
+        temp_comment.parent_comment = Comment.objects.get(id=parent_id)
         temp_comment.save()
+        
         return super().form_valid(form)
 
     def get_success_url(self):
