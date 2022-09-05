@@ -52,9 +52,18 @@
     <br><br>
 
     <div style="max-width: 500px; margin: auto;">
-        {% for comment in target_article.comment.all %}
-            {% include 'commentapp/detail.html' with comment=comment %}
-        {% endfor %}
+        {% with target_article.comment.count as total_comments %}
+            <h5 class="mt-5"> {{ total_comments }} comment{{ total_comments | pluralize }}</h5>
+        {% endwith %}
+        {% if not target_article.comment.all %}
+            아직 댓글이 없습니다.
+        {% else %}
+            {% for comment in target_article.comment.all %}
+                {% if not comment.parent_comment_id %}
+                {% include 'commentapp/detail.html' with comment=comment %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
         {% include 'commentapp/create.html' with article=target_article %}
     </div>
 </div>

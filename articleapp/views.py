@@ -12,6 +12,7 @@ from django.views.generic.edit import FormMixin
 
 from articleapp.forms import ArticleCreationForm
 from articleapp.models import Article, Like
+from commentapp.models import Comment
 from commentapp.forms import CommentCreationForm
 
 import json

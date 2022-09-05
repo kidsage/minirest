@@ -6,21 +6,20 @@
             &nbsp;
             {{ comment.writer.profile.nickname }}
         </strong>
-        {% if comment.parent_comment.name %} to <strong>{{ comment.parent_comment.name }}</strong> {% endif %}
-        &nbsp;&nbsp;&nbsp;
+        {% if comment.parent_comment.name %} to <strong>{{ comment.parent_comment.name }}</strong> {% endif %}&nbsp;
+        <small class="text-muted">
         {% if comment.created_at != comment.updated_at %}
             {{ comment.updated_at | date:"Y-m-d H:m:s" }}
         {% else %}
             {{ comment.created_at | date:"Y-m-d H:m:s" }}
         {% endif %}
+        </small>
     </div>
     <div style="margin: 1rem 0;">
-        {{ comment.content | safe }}
-        <button class="btn btn-primary btn-sm" onclick="handlereply({{comment.id}})">대댓글</button>
-        <div id="reply-form-container-{{comment.id}}" style="display: none;">
-            <form action="{% url 'commentapp:create' %}" method="post">
-                {% csrf_token %}
-            </form>
+        <p>{{ comment.content | safe }}</p>
+        <button class="btn btn-primary btn-sm" onclick="handleReply({{ comment.id }})">대댓글</button>
+        <div id="reply-form-container-{{ comment.id }}" style="display: none;">
+            {% include 'commentapp/create.html' with article=target_article comment=comment %}
         </div>
     </div>
     {% if comment.writer == user %}
@@ -29,4 +28,7 @@
         <a href="{% url 'commentapp:delete' pk=comment.pk %}" class="btn btn-danger rounded-pill">삭제</a>
     </div>
     {% endif %}
+    {% for comment in comment.get_comments %}
+        {% include 'commentapp/detail.html' with comment=comment %}
+    {% endfor %}
 </div>

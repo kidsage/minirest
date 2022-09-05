@@ -9,15 +9,20 @@ class Comment(models.Model):
     article = models.ForeignKey(Article, on_delete=models.SET_NULL, null=True, related_name='comment')
     writer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='comment')
     content = models.TextField(null=False)
+    parent_comment = models.ForeignKey('self', on_delete=models.SET_NULL, null=True) # 1:N의 관계. 대댓글이 아닌 경우에는 null값이 생기니 True로 설정.
+
     created_at = models.DateTimeField(auto_now_add=True, null=False)
     updated_at = models.DateTimeField(auto_now=True, null=False)
-    parent_comment = models.ForeignKey('self', on_delete=models.SET_NULL, null=True) # 1:N의 관계. 대댓글이 아닌 경우에는 null값이 생기니 True로 설정.
+    active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.content
 
     class Meta:
         ordering = ['-created_at']
+
+    def get_comments(self):
+        return Comment.objects.filter(parent_comment=self).filter(active=True)
 
 
 # class Reply(models.Model):

@@ -32,6 +32,9 @@ class Article(models.Model):
     # def get_absolute_url(self):
     #     return reverse('articleapp:detail', slug=self.slug)
 
+    def get_comments(self):
+        return self.comment.filter(parent_comment=None)
+
 
 class Like(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='like_user')
