@@ -56,7 +56,7 @@
             {% else %}
                 {% for comment in target_article.comment.all %}
                     {% if not comment.parent_comment_id %}
-                    {% include 'commentapp/detail.html' with comment=comment %}
+                        {% include 'commentapp/detail.html' with comment=comment %}
                     {% endif %}
                 {% endfor %}
             {% endif %}
