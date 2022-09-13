@@ -3,33 +3,30 @@
 
 {% block content %}
 
-<div style="text-align: center;">
-    <div style="margin: 4rem; max-width: 1200px; height: 761px; margin: 0 auto;">
-        <div style="display: flex; width: 510px; height: 100%;  float: left;">
-            <img src="{{ target_article.image.url }}" alt="" style="border: 1rem; border-radius: 3rem 0 0 3rem; max-width: 100%; max-height: 100%; object-fit: fill;">
+<div style="display: flex; text-align: center; width: 100%;">
+    <div style="margin: 4rem 1rem; max-width: 1200px; height: auto; margin: 0 auto;">
+        <div style="max-width: 500px; float: left; padding: 1rem 1rem;">
+            <img src="{{ target_article.image.url }}" alt="" style="min-width: 360px; width: 100%; border-radius: 3rem 0 0 3rem; object-fit: fill;">
         </div>
-        <div style="width: 10%;"></div>
-        <div class="text-start" style="width: 500px; height: 400px; padding-left: 5px; float: left;">
-            <h1>{{ target_article.title }}</h1>
-            <div style="text-align: left; font-size: 1rem;">
-                <a href="{% url 'articleapp:like' pk=target_article.pk %}">
-                    <i style="vertical-align: middle; font-size: 1.2rem; color: red;" class="material-icons">favorite</i>
-                </a>
-                <span style="font-size: 0.8rem;">
-                    {{ target_article.liked_user.first }} 님 포함 {{ target_article.liked_user.count }}명이 이 게시물을 좋아합니다.
-                </span>
-            </div><br>
-            <div style="float: inline-start;">
-                <img src="{{ target_article.writer.profile.image.url }}" alt="" style="height: 4rem; width: 4rem; border-radius: 10rem; object-fit: cover;  vertical-align: middle;">
+        <div class="text-start" style="width: 500px; float: left; padding: 1rem 4rem;">
+            <h1 style="font-family: 'NanumSquareEB'">{{ target_article.title }}</h1><br>
+            <div style="display: inline-flexbox; vertical-align: middle;">
+                <img src="{{ target_article.writer.profile.image.url }}" alt="" style="height: 3.5rem; width: 3.5rem; border-radius: 10rem; object-fit: cover;">
                 {{ target_article.writer.profile.nickname }}
             </div><br>
+            <div style="text-align: left; font-size: 1rem;">
+                <a href="{% url 'articleapp:like' pk=target_article.pk %}"><i style="color: red;" class="fa-solid fa-heart"></i></a>
+                <span style="font-size: 1rem;">
+                    {{ target_article.liked_user.count }}
+                </span>
+            </div>
             <!-- TAGGIT PART -->
-            <div>
-                <i class="fas fa-tags" aria-hidden="true"></i>&nbsp;태그:
+            <div style="font-size: 0.8rem;">
+                <i class="fas fa-tags" aria-hidden="true"></i>&nbsp;태그 :&nbsp;
                 {% load taggit_templatetags2_tags %}
                 {% get_tags_for_object object as "tags" %}
                 {% for tag in tags %}
-                    <a href="{% url 'articleapp:tagged_object_list' tag.name %}" class="btn btn-light btn-sm rounded-pill">
+                    <a href="{% url 'articleapp:tagged_object_list' tag.name %}" class="btn btn-sm rounded-pill" style="background-color: lightgrey; font-size: 0.7rem;">
                         {{ tag.name }}
                     </a>
                 {% endfor %}
@@ -38,19 +35,19 @@
                     <button class="btn btn-light btn-sm rounded-pill">tagcloud</button>
                 </a> -->
             </div><br>
-            <div>{{ target_article.content | safe }}</div><br>
+            <div >{{ target_article.content | safe }}</div><br>
             <div style="float: right;">
                 {% if target_article.writer == user %}
-                <a href="{% url 'articleapp:update' pk=target_article.pk %}" class="btn btn-dark btn-sm rounded-pill">수정</a>
-                <a href="{% url 'articleapp:delete' pk=target_article.pk %}" class="btn btn-danger btn-sm rounded-pill">삭제</a>
+                <a href="{% url 'articleapp:update' pk=target_article.pk %}" class="btn btn-dark btn-sm rounded-pill" style="font-size: 0.7rem;">수정</a>
+                <a href="{% url 'articleapp:delete' pk=target_article.pk %}" class="btn btn-danger btn-sm rounded-pill" style="font-size: 0.7rem;">삭제</a>
                 {% endif %}
             </div>
             <div>
                 {% with target_article.comment.count as total_comments %}
-                    <h5 class="mt-5"> {{ total_comments }} comment{{ total_comments | pluralize }}</h5>
+                    <h6 class="mt-5">{{ total_comments }} comment{{ total_comments | pluralize }}</h6>
                 {% endwith %}
                 {% if not target_article.comment.all %}
-                    아직 댓글이 없습니다.
+                    <h6>아직 댓글이 없습니다.</h6>
                 {% else %}
                     {% for comment in target_article.comment.all %}
                         {% if not comment.parent_comment_id %}

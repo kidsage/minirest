@@ -3,12 +3,12 @@
 
 {% block content %}
 
-<div style="text-align: center; max-width: 500px; margin: 4rem auto;">
+<div style="text-align: center; padding: 1rem;">
     {% if user.is_authenticated %}
     <form action="{% url 'commentapp:create' %}" method="post">
         {% csrf_token %}
-        <h6>댓글</h6>
-        {% bootstrap_form form show_label=False placeholder='댓글을 작성해주세요' %}
+        <h6 style="font-size: 0.8rem;">댓글</h6>
+        {% bootstrap_form form show_label=False %}
         <input type="submit" class="btn btn-dark rounded-pill col-3 mt-3">
     {% else %}
         <a href="{% url 'accountapp:login' %}?next={{ request.path }}" class="btn btn-dark rounded-pill col-3 mt-3">
@@ -20,5 +20,15 @@
     </form>
 </div>
 
-<script>var editor = new MediumEditor('.editable');</script>
+<script>
+    var editor = new MediumEditor('.editable', {
+        placeholder: {
+        /* This example includes the default options for placeholder,
+           if nothing is passed this is what it used */
+        text: '글씨를 드래그 해보세요!',
+        hideOnClick: true
+        },
+        autoLink: true
+    });
+</script>
 {% endblock %}

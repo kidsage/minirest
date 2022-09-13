@@ -1,9 +1,6 @@
 {% load static %}
 
-<!-- COMMENT JS -->
-<script src="{% static 'js/comment.js'%}"></script>
-
-<div style="display: block; text-align: left; padding: 5%;">
+<div style="text-align: left;">
     <div>
         <strong>
             <img src="{{ comment.writer.profile.image.url }}" alt="" style="height: 2rem; width: 2rem; border-radius: 10rem; object-fit: cover; vertical-align: middle;">
@@ -18,23 +15,27 @@
             {{ comment.created_at | date:"Y-m-d H:m:s" }}
         {% endif %}
         </small>
+        {% if comment.writer == user %}
+            <a href="{% url 'commentapp:update' pk=comment.pk %}" class="btn btn-sm rounded-pill" style="font-size: 0.7rem;">수정</a>
+            <a href="{% url 'commentapp:delete' pk=comment.pk %}" class="btn btn-sm rounded-pill" style="font-size: 0.7rem;">삭제</a>
+        {% endif %}
     </div>
-    <div style="margin: 1rem 0;">
+    <div style="margin: 1rem 0; font-size: 0.9rem;">
         <p>{{ comment.content | safe }}</p>
     </div>
-    {% if comment.writer == user %}
     <div style="text-align: right;">
-        <button class="btn btn-primary btn-sm rounded-pill active" type="button" onclick="handleReply({{ comment.id }})">대댓글</button>
-        
+        <button class="btn btn-sm rounded-pill" type="button" onclick="handleReply({{ comment.id }})" style="font-size: 0.7rem;">대댓글</button>
         <div id="reply-form-container-{{ comment.id }}" style="display: none;">
+            <button class="btn btn-sm rounded-pill" type="button" onclick="handleCancel({{ comment.id }})" style="font-size: 0.7rem;">취소</button>
             {% include 'commentapp/create.html' with article=target_article comment=comment %}
-            <button class="btn btn-light border btn-sm rounded-pill" type="button" onclick="handleCancel({{ comment.id }})">취소</button>
         </div>
-        <a href="{% url 'commentapp:update' pk=comment.pk %}" class="btn btn-primary btn-sm rounded-pill">수정</a>
-        <a href="{% url 'commentapp:delete' pk=comment.pk %}" class="btn btn-danger btn-sm rounded-pill">삭제</a>
     </div>
-    {% endif %}
-    {% for comment in comment.get_comments %}
-        {% include 'commentapp/detail.html' with comment=comment %}
-    {% endfor %}
+    <div style="padding: 0 5%;">
+        {% for comment in comment.get_comments %}
+            {% include 'commentapp/detail.html' with comment=comment %}
+        {% endfor %}
+    </div>
 </div>
+
+<!-- COMMENT JS -->
+<script src="{% static 'js/comment.js'%}"></script>
