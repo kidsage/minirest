@@ -42,22 +42,40 @@
                 <a href="{% url 'articleapp:delete' pk=target_article.pk %}" class="btn btn-danger btn-sm rounded-pill" style="font-size: 0.7rem;">삭제</a>
                 {% endif %}
             </div>
-            <div>
-                {% with target_article.comment.count as total_comments %}
-                    <h6 class="mt-5">{{ total_comments }} comment{{ total_comments | pluralize }}</h6>
-                {% endwith %}
-                {% if not target_article.comment.all %}
-                    <h6>아직 댓글이 없습니다.</h6>
-                {% else %}
-                    {% for comment in target_article.comment.all %}
-                        {% if not comment.parent_comment_id %}
-                            {% include 'commentapp/detail.html' with comment=comment %}
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
-                {% include 'commentapp/create.html' with article=target_article %}
+            <div style="text-align: left; margin: 3rem 0;">
+                <a id="commentToggle" type="button" onclick="openCloseToc()">
+                    <div style="font-family: 'NanumSquareB';">
+                        <span>댓글 {{ target_article.comment.count }}개</span>
+                        <span id="commentSign">></span>
+                    </div>
+                </a>
+                <div id="commentList" style="display: none;">
+                    {% if not target_article.comment.all %}
+                        <h6>댓글이 없습니다.</h6>
+                    {% else %}
+                        {% for comment in target_article.comment.all %}
+                            {% if not comment.parent_comment_id %}
+                                {% include 'commentapp/detail.html' with comment=comment %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    {% include 'commentapp/create.html' with article=target_article %}
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    function openCloseToc() {
+        if(document.getElementById('commentList').style.display === 'block') {
+            document.getElementById('commentList').style.display = 'none';
+            document.getElementById('commentSign').textContent = '>'
+        } else {
+            document.getElementById('commentList').style.display = 'block';
+            document.getElementById('commentSign').textContent = '<'
+        }
+    }
+</script>
+
 {% endblock %}
