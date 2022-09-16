@@ -21,14 +21,21 @@
             {% endif %}
         {% endif %}
         <div class="text-center mb-5">
-            <div>
-                팔로잉: {{ user.followings.all | length }} / 팔로워 : {{ user.followers.all | length }}
+            <div class="btn btn-sm btn-dark rounded-pill" style="padding: 0.5rem;">
+                팔로잉: {{ user.followings.all | length }} / 팔로워 : {{ user.followers.all | length }}</h6>
             </div>
-            {% if user.is_authenticated %}
-                {% if user != target_user %}
-                    
+            <br><br>
+            <div>
+                {% if user.is_authenticated %}
+                    {% if user != target_user %}
+                        {% if user in target_user.followers.all %}
+                            <a href="{% url 'accountapp:follow' %}?user_pk={{ target_user.pk }}" class="btn btn-sm btn-primary rounded-pill">팔로우 취소</a>
+                        {% else %}
+                            <a href="{% url 'accountapp:follow' %}?user_pk={{ target_user.pk }}" class="btn btn-sm btn-primary rounded-pill">팔로우</a>
+                        {% endif %}
+                    {% endif %}
                 {% endif %}
-            {% endif %}
+            </div>
         </div>
         {% if user == target_user %}
         <div style="display: inline-block; vertical-align: middle;">

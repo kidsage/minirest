@@ -54,6 +54,7 @@ class AccountDeleteView(DeleteView):
     template_name = 'accountapp/delete.html'
 
 
+@method_decorator(login_required, 'get')
 class AccountFollowView(RedirectView):
 
     def get_redirect_url(self, *args, **kwargs):
