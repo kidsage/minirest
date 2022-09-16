@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse, reverse_lazy
-from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, RedirectView
 from django.views.generic.list import MultipleObjectMixin
 from accountapp.forms import AccountCreateForm, AccountUpdateForm
 from accountapp.models import User
@@ -52,3 +52,21 @@ class AccountDeleteView(DeleteView):
     context_object_name = 'target_user'
     success_url = reverse_lazy('accountapp:login')
     template_name = 'accountapp/delete.html'
+
+
+class AccountFollowView(RedirectView):
+
+    def get_redirect_url(self, *args, **kwargs):
+        return reverse('accountapp:detail', kwargs={'pk' : self.request.GET.get('user_pk')})
+
+    def get(self, request, *args, **kwargs):
+        
+        user = get_object_or_404(User, pk=self.request.GET.get('user_pk'))
+
+        if user != self.request.user:
+            if user.followers.filter(pk=self.request.user.pk).exists():
+                user.followers.remove(self.request.user)
+            else:
+                user.followers.add(self.request.user)
+
+        return super(AccountFollowView, self).get(request, *args, **kwargs)

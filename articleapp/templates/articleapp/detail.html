@@ -12,7 +12,7 @@
             <h1 style="font-family: 'NanumSquareEB'">{{ target_article.title }}</h1><br>
             <div style="display: inline-flexbox; vertical-align: middle;">
                 <img src="{{ target_article.writer.profile.image.url }}" alt="" style="height: 3.5rem; width: 3.5rem; border-radius: 10rem; object-fit: cover;">
-                {{ target_article.writer.profile.nickname }}
+                <a href="{% url 'accountapp:detail' pk=target_article.writer.pk %}">{{ target_article.writer.profile.nickname }}</a>
             </div><br>
             <div>{{ target_article.content | safe }}</div><br>
             <div></div>

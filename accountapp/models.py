@@ -48,6 +48,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     date_joined = models.DateTimeField(default=timezone.now)
+    followings = models.ManyToManyField('self', symmetrical=False, related_name='followers')
 
     USERNAME_FIELD = 'email'    
     # REQUIRED_FIELDS = ['organization']
