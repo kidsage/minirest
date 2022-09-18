@@ -15,11 +15,16 @@
             <h4 style="margin: 2rem 3rem;">{{ target_user.profile.message }}</h4>
         {% else %}
             {% if target_user == user %}
-                <a style="margin-right: 1rem;" href="{% url 'profileapp:create' %}"><h2>프로필 생성</h2></a>
+            <div style="align-items: center;">
+                <h2><a href="{% url 'profileapp:create' %}">프로필 생성&nbsp;<i class="fa-solid fa-user-pen"></i></a></h2>
+            </div>
+            <br>
             {% else %}
-                <h2>닉네임을 설정하지 않은 유저입니다</h2>
+                <h2>프로필을 설정하지 않은 유저입니다.</h2>
+                <br>
             {% endif %}
         {% endif %}
+        
         <div class="text-center mb-5">
             <div class="btn btn-sm btn-dark rounded-pill" style="padding: 0.5rem;">
                 팔로워 : {{ target_user.followers.all | length }} &nbsp;&nbsp; 팔로우 : {{ target_user.followings.all | length }}
@@ -29,7 +34,7 @@
                 {% if user.is_authenticated %}
                     {% if user != target_user %}
                         {% if user in target_user.followers.all %}
-                            <a href="{% url 'accountapp:follow' %}?user_pk={{ target_user.pk }}" class="btn btn-sm btn-primary rounded-pill">팔로우 취소</a>
+                            <a href="{% url 'accountapp:follow' %}?user_pk={{ target_user.pk }}" class="btn btn-sm btn-danger rounded-pill">팔로우 취소</a>
                         {% else %}
                             <a href="{% url 'accountapp:follow' %}?user_pk={{ target_user.pk }}" class="btn btn-sm btn-primary rounded-pill">팔로우</a>
                         {% endif %}
@@ -41,7 +46,7 @@
         <div style="display: inline-block; vertical-align: middle;">
             <a class="fw-bold" style="margin-right: 1rem;" href="{% url 'accountapp:update' pk=user.pk %}"><span class="btn btn-secondary rounded-pill">개인정보 수정</span></a>
             <a class="fw-bold" style="margin-right: 1rem;" href="{% url 'accountapp:delete' pk=user.pk %}"><span class="btn btn-secondary rounded-pill">아이디 삭제</span></a>
-            <a class="fw-bold" style="margin-right: 1rem;" href="{% url 'projectapp:list' %}"><span class="btn btn-secondary rounded-pill">핀 리스트</span></a>
+            <!-- <a class="fw-bold" style="margin-right: 1rem;" href="{% url 'projectapp:list' %}"><span class="btn btn-secondary rounded-pill">핀 리스트</span></a> -->
             <a class="fw-bold" href="{% url 'subscribeapp:list' %}"><span class="btn btn-secondary rounded-pill">구독 리스트</span></a>
         </div>
         {% endif %}

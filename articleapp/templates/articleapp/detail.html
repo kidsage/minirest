@@ -3,16 +3,16 @@
 
 {% block content %}
 
-<div style="display: flex; text-align: center; width: 100%; font-family: 'NanumSquareB';">
-    <div style="margin: 4rem 1rem; max-width: 1200px; height: auto; margin: 0 auto;">
+<div style="display: flex; text-align: center; font-family: 'NanumSquareB';">
+    <div style="margin: 4rem 1rem; max-width: 1200px; margin: 0 auto;">
         <div style="max-width: 500px; float: left; padding: 1rem 1rem;">
-            <img src="{{ target_article.image.url }}" alt="" style="min-width: 360px; width: 100%; border-radius: 3rem 0 0 3rem; object-fit: fill;">
+            <img src="{{ target_article.image.url }}" alt="" style="width: 90%; height: auto; border-radius: 3rem 0 0 3rem; object-fit: fill;">
         </div>
-        <div class="text-start" style="width: 500px; float: left; padding: 1rem 4rem;">
+        <div class="text-start" style="width: 500px; float: left; padding: 1rem 4rem; align-items: center;">
             <h1 style="font-family: 'NanumSquareEB'">{{ target_article.title }}</h1><br>
-            <div style="display: inline-flexbox; vertical-align: middle;">
-                <img src="{{ target_article.writer.profile.image.url }}" alt="" style="height: 3.5rem; width: 3.5rem; border-radius: 10rem; object-fit: cover;">
-                <a href="{% url 'accountapp:detail' pk=target_article.writer.pk %}">{{ target_article.writer.profile.nickname }}</a>
+            <div>
+                <img src="{{ target_article.writer.profile.image.url }}" alt="" style="height: 3.5rem; width: 3.5rem; border-radius: 10rem; object-fit: cover; margin-right: 0.3rem;">
+                <a href="{% url 'accountapp:detail' pk=target_article.writer.pk %}" style="font-size: 1.1rem;">{{ target_article.writer.profile.nickname }}</a>
             </div><br>
             <div>{{ target_article.content | safe }}</div><br>
             <div></div>
@@ -39,18 +39,19 @@
             </div><br>
             <div style="float: right;">
                 {% if target_article.writer == user %}
-                <a href="{% url 'articleapp:update' pk=target_article.pk %}" class="btn btn-dark btn-sm rounded-pill" style="font-size: 0.7rem;">수정</a>
-                <a href="{% url 'articleapp:delete' pk=target_article.pk %}" class="btn btn-danger btn-sm rounded-pill" style="font-size: 0.7rem;">삭제</a>
+                    <a href="{% url 'articleapp:update' pk=target_article.pk %}" class="btn btn-dark btn-sm rounded-pill" style="font-size: 0.7rem;">수정</a>
+                    <a href="{% url 'articleapp:delete' pk=target_article.pk %}" class="btn btn-danger btn-sm rounded-pill" style="font-size: 0.7rem;">삭제</a>
                 {% endif %}
             </div>
             <div style="text-align: left; margin: 3rem 0;">
                 <a id="commentToggle" type="button" onclick="openCloseToc()">
                     <div>
                         <span>댓글 {{ target_article.comment.count }}개</span>
-                        <span id="commentSign">></span>
+                        <span id="commentSign" style="font-weight: bolder;">∨</span>
                     </div>
                 </a>
-                <div id="commentList" style="display: none;">
+                <br><br>
+                <div id="commentList" style="display: block;">
                     {% if not target_article.comment.all %}
                         <h6>댓글이 없습니다.</h6>
                     {% else %}
@@ -71,10 +72,10 @@
     function openCloseToc() {
         if(document.getElementById('commentList').style.display === 'block') {
             document.getElementById('commentList').style.display = 'none';
-            document.getElementById('commentSign').textContent = '>'
+            document.getElementById('commentSign').textContent = '>';
         } else {
             document.getElementById('commentList').style.display = 'block';
-            document.getElementById('commentSign').textContent = '<'
+            document.getElementById('commentSign').textContent = '∨';
         }
     }
 </script>

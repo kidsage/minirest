@@ -48,4 +48,4 @@ class ProjectListView(ListView):
     model = Project
     context_object_name = 'project_list'
     template_name = 'projectapp/list.html'
-    paginate_by = 30 # 나중에 페이지네이션 쪽 업그레이드 할 예정
+    paginate_by = 4 # 나중에 페이지네이션 쪽 업그레이드 할 예정

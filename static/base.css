@@ -25,6 +25,9 @@
     html {
         font-size: 13px;
     }
+    img {
+        border-radius: 3rem 3rem 0 0;
+    }
 }
 
 

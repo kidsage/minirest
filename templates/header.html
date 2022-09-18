@@ -1,7 +1,7 @@
 {% load django_bootstrap5 %}
 
-<nav class="navbar navbar-expand-lg navbar-white bg-white" style="padding: 1rem 1rem; overflow: visible; position: relative; z-index: 1;">
-    <div class="d-flex bd-highlight container-fluid justify-content-around">
+<nav class="navbar navbar-expand-lg navbar-white bg-white" style="padding: 1.5rem 3rem; overflow: visible; position: relative; z-index: 1;">
+    <div class="container-fluid justify-content-around">
         <a class="navbar-brand minirest_logo" style="color: rgb(134, 9, 9); font-size: 48px;" href="{% url 'articleapp:list' %}">Minirest</a>
         <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -11,6 +11,7 @@
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <li><a class="dropdown-item" href="{% url 'articleapp:create' %}">글쓰기</a></li>
                 <li><a class="dropdown-item" href="{% url 'projectapp:create' %}">핀 카테고리 만들기</a></li>
+                <li><a class="dropdown-item" href="{% url 'projectapp:list' %}">핀 카테고리 목록</a></li>
             </ul>
         </div>
         <form class="flex-grow-1 p-3" action="{% url 'searchapp:search' %}" method="get">

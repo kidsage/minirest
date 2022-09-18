@@ -12,6 +12,7 @@ from django.views.generic.edit import FormMixin
 
 from articleapp.forms import ArticleCreationForm
 from articleapp.models import Article, Like
+from projectapp.models import Project
 from commentapp.models import Comment
 from commentapp.forms import CommentCreationForm
 
@@ -36,7 +37,7 @@ class ArticleCreateView(CreateView):
         return reverse('articleapp:detail', kwargs={'pk' : self.object.pk})
 
 
-class ArticleDetailView(DetailView, FormMixin):
+class ArticleDetailView(FormMixin, DetailView):
     model = Article
     form_class = CommentCreationForm
     context_object_name = 'target_article'
@@ -72,6 +73,10 @@ class ArticleListView(ListView):
     template_name = 'articleapp/list.html'
     # paginate_by = 20
 
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        context['project_list'] = Project.objects.all()
+        return context
 
 @method_decorator(login_required, 'get')
 class ArticleLikesView(RedirectView):

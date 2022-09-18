@@ -1,11 +1,13 @@
-{% load static %}
-
 <div style="text-align: left;">
     <div>
         <strong>
-            <img src="{{ comment.writer.profile.image.url }}" alt="" style="height: 2rem; width: 2rem; border-radius: 10rem; object-fit: cover; vertical-align: middle;">
+            <img src="{{ comment.writer.profile.image.url }}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/75/75519.png'" alt="Unknown" style="height: 2rem; width: 2rem; border-radius: 10rem; object-fit: cover; vertical-align: middle;">
             &nbsp;
-            {{ comment.writer.profile.nickname }}
+            {% if comment.writer.profile %}
+                <a href="{% url 'accountapp:detail' pk=comment.writer.pk %}">{{ comment.writer.profile.nickname }}</a>
+            {% else %}
+                {{ comment.writer.email }}
+            {% endif %}
         </strong>
         {% if comment.parent_comment.writer %} to <strong>{{ comment.parent_comment.writer.profile.nickname }}</strong> {% endif %}&nbsp;
         <small class="text-muted">
@@ -15,22 +17,26 @@
             {{ comment.created_at | date:"Y-m-d H:m:s" }}
         {% endif %}
         </small>
-        {% if comment.writer == user %}
-            <a href="{% url 'commentapp:update' pk=comment.pk %}" class="btn btn-sm rounded-pill" style="font-size: 0.7rem;">수정</a>
-            <a href="{% url 'commentapp:delete' pk=comment.pk %}" class="btn btn-sm rounded-pill" style="font-size: 0.7rem;">삭제</a>
-        {% endif %}
     </div>
-    <div style="margin: 1rem 0; font-size: 0.9rem;">
+    <span style="margin: 1rem 0; font-size: 0.9rem;">
         <p>{{ comment.content | safe }}</p>
-    </div>
-    <div style="text-align: right;">
-        <button class="btn btn-sm rounded-pill" type="button" onclick="handleReply({{ comment.id }})" style="font-size: 0.7rem;">대댓글</button>
-        <div id="reply-form-container-{{ comment.id }}" style="display: none;">
-            <button class="btn btn-sm rounded-pill" type="button" onclick="handleCancel({{ comment.id }})" style="font-size: 0.7rem;">취소</button>
+    </span>
+    <span>
+        <button type="button" onclick="handleReply({{ comment.id }})" style="font-size: 0.5rem; border: 0;">
+            <i class="fa-solid fa-reply""></i>
+            대댓글
+        </button>
+        <span id="reply-form-container-{{ comment.id }}" style="display: none;">
             {% include 'commentapp/create.html' with article=target_article comment=comment %}
-        </div>
-    </div>
-    <div style="padding: 0 5%;">
+        </span>
+    </span>
+    {% if comment.writer == user %}
+        <span>
+            <a href="{% url 'commentapp:update' pk=comment.pk %}" style="font-size: 0.5rem; margin-right: 0.5rem;">수정</a>
+            <a href="{% url 'commentapp:delete' pk=comment.pk %}" style="font-size: 0.5rem;">삭제</a>
+        </span>
+    {% endif %}
+    <div style="padding: 5% 5%;">
         {% for comment in comment.get_comments %}
             {% include 'commentapp/detail.html' with comment=comment %}
         {% endfor %}
@@ -38,4 +44,13 @@
 </div>
 
 <!-- COMMENT JS -->
-<script src="{% static 'js/comment.js'%}"></script>
+<script>
+    function handleReply(response_id) {
+    const reply_form_container = document.querySelector(`#reply-form-container-${response_id}`)
+    if (reply_form_container.style.display === 'block') {
+        reply_form_container.style.display = 'none';
+    }
+    else
+        reply_form_container.style.display = 'block';
+}
+</script>
