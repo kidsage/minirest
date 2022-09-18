@@ -22,7 +22,7 @@
         {% endif %}
         <div class="text-center mb-5">
             <div class="btn btn-sm btn-dark rounded-pill" style="padding: 0.5rem;">
-                팔로잉: {{ user.followings.all | length }} / 팔로워 : {{ user.followers.all | length }}</h6>
+                팔로워 : {{ target_user.followers.all | length }} &nbsp;&nbsp; 팔로우 : {{ target_user.followings.all | length }}
             </div>
             <br><br>
             <div>
