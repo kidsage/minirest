@@ -15,7 +15,7 @@ class ArticleCreationForm(ModelForm):
     content = forms.CharField(label='내용', widget=forms.Textarea(attrs={'class' : 'editable text-start',
                                                                         'style' : 'height: auto',
                                                                         'placeholder' : '내용을 입력해주세요'}))
-    tags = TagField(label='태그')
+    tags = TagField(label='태그', required=False)
     # slug = forms.SlugField()
 
     class Meta:

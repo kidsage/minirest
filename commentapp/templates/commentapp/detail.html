@@ -1,14 +1,12 @@
 <div style="text-align: left;">
     <div>
-        <strong>
-            <img src="{{ comment.writer.profile.image.url }}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/75/75519.png'" alt="Unknown" style="height: 2rem; width: 2rem; border-radius: 10rem; object-fit: cover; vertical-align: middle;">
-            &nbsp;
-            {% if comment.writer.profile %}
-                <a href="{% url 'accountapp:detail' pk=comment.writer.pk %}">{{ comment.writer.profile.nickname }}</a>
-            {% else %}
-                {{ comment.writer.email }}
-            {% endif %}
-        </strong>
+        <img src="{{ comment.writer.profile.image.url }}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/75/75519.png'" alt="Unknown" style="height: 2rem; width: 2rem; border-radius: 10rem; object-fit: cover; vertical-align: middle;">
+        &nbsp;
+        {% if comment.writer.profile %}
+            <a href="{% url 'accountapp:detail' pk=comment.writer.pk %}">{{ comment.writer.profile.nickname }}</a>
+        {% else %}
+        <a href="{% url 'accountapp:detail' pk=comment.writer.pk %}">{{ comment.writer.email }}</a>
+        {% endif %}
         {% if comment.parent_comment.writer %}
         {% if comment.parent_comment.writer == user %}
             나에게

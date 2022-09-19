@@ -19,7 +19,7 @@ has_ownership = [account_ownership_required, login_required]
 class AccountCreateView(CreateView):
     model = User
     form_class = AccountCreateForm
-    success_url = reverse_lazy('profileapp:create')
+    success_url = reverse_lazy('accountapp:detail')
     template_name = 'accountapp/create.html'
 
 

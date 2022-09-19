@@ -10,8 +10,12 @@
         <div class="text-start" style="width: 500px; float: left; padding: 1rem 4rem; align-items: center;">
             <h1 style="font-family: 'NanumSquareEB'">{{ target_article.title }}</h1><br>
             <div>
-                <img src="{{ target_article.writer.profile.image.url }}" alt="" style="height: 3.5rem; width: 3.5rem; border-radius: 10rem; object-fit: cover; margin-right: 0.3rem;">
-                <a href="{% url 'accountapp:detail' pk=target_article.writer.pk %}" style="font-size: 1.1rem;">{{ target_article.writer.profile.nickname }}</a>
+                <img src="{{ target_article.writer.profile.image.url }}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/75/75519.png'" alt="Unknown" style="height: 3.5rem; width: 3.5rem; border-radius: 10rem; object-fit: cover; margin-right: 0.3rem;">
+                {% if target_article.writer.profile.nickname %}
+                    <a href="{% url 'accountapp:detail' pk=target_article.writer.pk %}" style="font-size: 1.1rem;">{{ target_article.writer.profile.nickname }}</a>
+                {% else %}
+                    <a href="{% url 'accountapp:detail' pk=target_article.writer.pk %}" style="font-size: 1.1rem;">{{ target_article.writer.email}}</a>
+                {% endif %}
             </div><br>
             <div>{{ target_article.content | safe }}</div><br>
             <div></div>
