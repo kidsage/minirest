@@ -1,19 +1,46 @@
-# Minirest - Django Project
+# Minirest
 
 ## Description
 
 **Pinterest를 모티브로 한 웹페이지입니다.**
-- 게시판 기능 : 글, 댓글(대댓글), 팔로우, 구독, 이미지 업로드, 핀(모음) 등의 기능을 구현했습니다.
-- **Website Address : http://minirest.site / https://minirest.site**
+* 게시판 기능 : 글, 댓글(대댓글), 팔로우, 구독, 이미지 업로드, 핀(모음) 등의 기능을 구현했습니다.  
+```
+    1. 유저 개인의 프로필 및 글을 꾸밀 수 있습니다.
+    2. 상단 검색바로 찾고자 하는 글을 검색할 수 있습니다.
+    3. 댓글 및 대댓글 기능이 구현되어 있습니다. (댓글 접기 가능)
+    4. 유저 및 핀(프로젝트) 팔로우 기능이 구현되어 있습니다. (9/19 팔로우 리스트 보여주는 화면 구현 중)
+    5. 본인이 직접 핀(프로젝트)을 생성해서 다른 유저와 함께 공통된 주제의 글을 모아볼 수 있습니다.
+    
+    * 그 외 추가할 기능들은 미정입니다.
+```
+* Website : http://minirest.site
 
-<img width="1387" alt="스크린샷 2022-09-19 오후 3 32 04" src="https://user-images.githubusercontent.com/53895822/190961125-45a3a513-2aac-4141-ae3e-c6b9326dc050.png">
+**Web Screenshot**
+* main
+![image](https://user-images.githubusercontent.com/53895822/190965072-e51c11fb-75a8-431c-8d1c-52db7f59f50d.png)
+* In Article
+![image](https://user-images.githubusercontent.com/53895822/190965026-5000271b-e1f4-4e17-8d21-57ee4a6f22ec.png)
+
 
 ## Built With
-- minirest는 아래의 기술 스택들로 만들어졌습니다.
-* 
+minirest는 아래의 스택들로 만들어졌습니다.
 
+* <img src="https://img.shields.io/badge/python-3776AB?style=for-the-badge&logo=python&logoColor=white">
+* <img src="https://img.shields.io/badge/django-092E20?style=for-the-badge&logo=django&logoColor=white">
+* <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+* <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
+* <img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white">
+* <img src="https://img.shields.io/badge/postgresql-4169E1?style=for-the-badge&logo=postgresql&logoColor=white">
+* <img src="https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white">
+* <img src="https://img.shields.io/badge/amazonec2-FF9900?style=for-the-badge&logo=amazonec2&logoColor=white">
 
+    
+
+    
 ## Directory Structure
+
+<details>
+<summary>접기/펼치기</summary>
 
 ``` bash
 ├── README.md
@@ -156,6 +183,7 @@
         ├── list_fragment.html
         └── pagination.html
 ```
+</details>
 
 ## Reference
 - 작정하고 장고! Pinterest 만들기
