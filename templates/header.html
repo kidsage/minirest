@@ -2,7 +2,9 @@
     <div class="container-fluid justify-content-around">
         <a class="navbar-brand minirest_logo" style="color: rgb(134, 9, 9); font-size: 48px;" href="{% url 'articleapp:list' %}">Minirest</a>
         <div class="dropdown p-3">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">만들기</a>
+            <a class="nav-link dropdown-toggle fw-bold" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                만들기
+            </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="{% url 'articleapp:create' %}">글쓰기</a></li>
                 <li><hr class="dropdown-divider"></li>
