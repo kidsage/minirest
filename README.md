@@ -1,4 +1,6 @@
-# Minirest
+![image](https://user-images.githubusercontent.com/53895822/190969244-37e2186a-1d99-497a-bbfc-49c79eab7f7c.png)
+
+
 Pinterest를 모티브로 한 웹페이지입니다.  
 Address : http://minirest.site
 
