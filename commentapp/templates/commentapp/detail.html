@@ -9,7 +9,14 @@
                 {{ comment.writer.email }}
             {% endif %}
         </strong>
-        {% if comment.parent_comment.writer %} to <strong>{{ comment.parent_comment.writer.profile.nickname }}</strong> {% endif %}&nbsp;
+        {% if comment.parent_comment.writer %}
+        {% if comment.parent_comment.writer == user %}
+            나에게
+        {% else %}
+            가 {{ comment.parent_comment.writer.profile.nickname }} 에게
+        {% endif %}
+        {% endif %}
+        &nbsp;
         <small class="text-muted">
         {% if comment.created_at != comment.updated_at %}
             {{ comment.updated_at | date:"Y-m-d H:m:s" }}
@@ -23,7 +30,7 @@
     </span>
     <span>
         <button type="button" onclick="handleReply({{ comment.id }})" style="font-size: 0.5rem; border: 0;">
-            <i class="fa-solid fa-reply""></i>
+            <i class="fa-solid fa-reply"></i>
             대댓글
         </button>
         <span id="reply-form-container-{{ comment.id }}" style="display: none;">

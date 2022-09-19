@@ -1,7 +1,4 @@
-{% include 'head.html' %}
 {% load django_bootstrap5 %}
-
-{% block content %}
 
 <div style="text-align: center; padding: 1rem;">
     {% if user.is_authenticated %}
@@ -31,4 +28,3 @@
         autoLink: true
     });
 </script>
-{% endblock %}
