@@ -2,7 +2,7 @@
 
 
 Pinterest를 모티브로 한 웹페이지입니다.  
-Address : http://minirest.site
+Address : http://minirest.site (현재 폐쇄)
 
 ## Description
 * 게시판 기능 : 글, 댓글(대댓글), 팔로우, 구독, 이미지 업로드, 핀(모음) 등의 기능을 구현했습니다.  
